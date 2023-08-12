@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://5namnaxlf4wc"]
+
+[ext_resource type="PackedScene" uid="uid://dbpev4ul0i7pa" path="res://scenes/water_plane.tscn" id="1_dr3tk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4uq5x"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_uleel"]
+sky_material = SubResource("ProceduralSkyMaterial_4uq5x")
+
+[sub_resource type="Environment" id="Environment_4ei55"]
+background_mode = 2
+sky = SubResource("Sky_uleel")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fkx8f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmqg1"]
+albedo_color = Color(0, 0.760784, 0.156863, 1)
+
+[node name="map" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4ei55")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.303156, 0.948602, 0.0908335, -0.866303, -0.31405, 0.388448, 0.397009, 0.0390709, 0.916983, -21.9447, 0, -0.0569935)
+shadow_enabled = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="waterPlane" parent="Node" instance=ExtResource("1_dr3tk")]
+transform = Transform3D(28.8646, 0, 0, 0, 2.72797, 0, 0, 0, 37.026, 0, -0.0989804, -0.0161985)
+cast_shadow = 0
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Node"]
+transform = Transform3D(15.2174, 0, 0, 0, 0.0405504, -3.78838, 0, 8.29765, 0.0185137, 0, -0.297387, 0)
+mesh = SubResource("CapsuleMesh_fkx8f")
+material = SubResource("StandardMaterial3D_fmqg1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.606452, -0.443193, 0.660148, 0.00554899, 0.82787, 0.560892, -0.795101, 0.343817, -0.499604, 10.235, 2.94347, 0.842129)
